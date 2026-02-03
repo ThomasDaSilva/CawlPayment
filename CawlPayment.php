@@ -97,6 +97,9 @@ class CawlPayment extends AbstractPaymentModule
                 THELIA_MODULE_DIR.self::MODULE_CODE.'/I18n/*',
                 THELIA_MODULE_DIR.self::MODULE_CODE.'/Config/*',
                 THELIA_MODULE_DIR.self::MODULE_CODE.'/Model/*',
+                THELIA_MODULE_DIR.self::MODULE_CODE.'/Hook/*',
+                THELIA_MODULE_DIR.self::MODULE_CODE.'/Loop/*',
+                THELIA_MODULE_DIR.self::MODULE_CODE.'/Form/*',
             ])
             ->autowire(true)
             ->autoconfigure(true);

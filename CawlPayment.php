@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Thelia\Model\Order;
 use Thelia\Module\AbstractPaymentModule;
-use Thelia\Core\Install\Database;
+use Thelia\Install\Database;
 use Thelia\Log\Tlog;
 use Thelia\Tools\URL;
 

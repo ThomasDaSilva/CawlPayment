@@ -5,19 +5,15 @@ declare(strict_types=1);
 namespace CawlPayment\Hook;
 
 use CawlPayment\CawlPayment;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Thelia\Core\Event\Hook\HookRenderEvent;
 use Thelia\Core\Hook\BaseHook;
-use Thelia\Core\Template\Parser\ParserResolver;
-use Thelia\Core\Translation\Translator;
 
 /**
  * Admin hook for CAWL Payment module configuration
  *
- * Note: Le constructeur est surchargé pour éviter un bug OPcache dans BaseHook
- * où l'instanciation du module via `new $moduleClass()` échoue à cause d'une
- * désynchronisation de la hiérarchie de classes dans le cache PHP.
- * Le module est injecté par Symfony DI via la propriété $module.
+ * Uses the default BaseHook constructor which loads the module via ModuleQuery.
+ * This is required because BaseHook::render() needs $this->module to resolve
+ * template paths.
  */
 class AdminHook extends BaseHook
 {
@@ -25,31 +21,6 @@ class AdminHook extends BaseHook
      * Clé de session pour le token CSRF
      */
     private const CSRF_TOKEN_KEY = 'cawlpayment_csrf_token';
-
-    /**
-     * Override constructor to skip problematic module instantiation in BaseHook.
-     *
-     * BaseHook::__construct() tries to instantiate the module via `new $moduleClass()`
-     * which fails with OPcache due to class hierarchy caching issues.
-     * Since Symfony DI injects the module via property, we skip that part.
-     */
-    public function __construct(
-        ?EventDispatcherInterface $dispatcher = null,
-        ?ParserResolver $parserResolver = null,
-    ) {
-        if ($dispatcher instanceof EventDispatcherInterface) {
-            $this->dispatcher = $dispatcher;
-        }
-
-        if ($parserResolver instanceof ParserResolver) {
-            $this->parserResolver = $parserResolver;
-        }
-
-        // Skip module instantiation - it will be injected by Symfony DI
-        // This avoids the OPcache bug: "Cannot assign CawlPayment to property $module"
-
-        $this->translator = Translator::getInstance();
-    }
 
     /**
      * Render module configuration content

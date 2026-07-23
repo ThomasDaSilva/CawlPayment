@@ -78,7 +78,7 @@ class AdminHook extends BaseHook
         $formToken = bin2hex(random_bytes(32));
         $this->getSession()->set(self::CSRF_TOKEN_KEY, $formToken);
 
-        $event->add($this->render('module-configuration.html', [
+        $event->add($this->render('module-configuration.html.twig', [
             'config' => $config,
             'config_json' => json_encode($config),
             'enabled_methods_list' => $enabledMethodsList,

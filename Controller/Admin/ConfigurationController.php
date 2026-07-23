@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 use Thelia\Controller\Admin\BaseAdminController;
 use Thelia\Core\Security\AccessManager;
 use Thelia\Core\Security\Resource\AdminResources;
@@ -33,6 +34,7 @@ class ConfigurationController extends BaseAdminController
     ) {
     }
 
+    #[Route(path: '/admin/cawlpayment/configure', name: 'cawlpayment.admin.configure', methods: ['POST'])]
     public function saveAction(Request $request): Response
     {
         if (null !== $response = $this->checkAuth(
@@ -154,6 +156,7 @@ class ConfigurationController extends BaseAdminController
         }
     }
 
+    #[Route(path: '/admin/module/CawlPayment/payment-products', name: 'cawlpayment.admin.payment_products', methods: ['GET'])]
     public function paymentProductsAction(Request $request): JsonResponse
     {
         if (null !== $response = $this->checkAuth(
@@ -183,6 +186,7 @@ class ConfigurationController extends BaseAdminController
         }
     }
 
+    #[Route(path: '/admin/module/CawlPayment/test-transaction', name: 'cawlpayment.admin.test_transaction', methods: ['POST'])]
     public function createTestTransactionAction(Request $request): JsonResponse
     {
         if (null !== $response = $this->checkAuth(
@@ -224,6 +228,7 @@ class ConfigurationController extends BaseAdminController
         }
     }
 
+    #[Route(path: '/admin/module/CawlPayment/logs', name: 'cawlpayment.admin.logs', methods: ['GET'])]
     public function getLogsAction(Request $request): JsonResponse
     {
         if (null !== $response = $this->checkAuth(
@@ -247,6 +252,7 @@ class ConfigurationController extends BaseAdminController
         return new JsonResponse(['success' => true, 'lines' => \array_slice($cawlLines, -50)]);
     }
 
+    #[Route(path: '/admin/module/CawlPayment/test-connection', name: 'cawlpayment.admin.test_connection', methods: ['POST'])]
     public function testConnectionAction(Request $request): JsonResponse
     {
         if (null !== $response = $this->checkAuth(

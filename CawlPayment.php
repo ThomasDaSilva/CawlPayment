@@ -107,6 +107,7 @@ class CawlPayment extends AbstractPaymentModule
                 __DIR__.'/Hook/*',
                 __DIR__.'/Loop/*',
                 __DIR__.'/Form/*',
+                __DIR__.'/EventListeners/*',
                 __DIR__.'/vendor/*',
             ])
             ->autowire(true)
